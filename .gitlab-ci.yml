@@ -4,7 +4,6 @@ stages:
   - release
   - deploy
 
-
 # https://gitlab.nxs360.com/help/user/packages/composer_repository/index#publish-a-composer-package-by-using-cicd
 deploy:composer:
   stage: deploy
