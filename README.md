@@ -18,19 +18,33 @@ if [ -d "$HOME/.config/composer/vendor/bin" ] ;
 fi
 
 # set OPENAI_KEY environment variable
-export OPENAI_KEY=sk-....
+export OPENAI_KEY=sk-...
 
 # Commit everything helper function
 function commit() {
   commitMessage="$*"
 
   git add .
-    
-  if [ "$commitMessage" = "" ]; then
-     commitMessage=$(php aicommits)
+
+  # Get the current branch name
+  branch=$(git rev-parse --abbrev-ref HEAD)
+
+  # Define the regular expression pattern for your branch naming convension
+  pattern="^(feature|bugfix|task|hotfix|improvement|release)/([[:alnum:]-]+)"
+
+  # Extract the specific part using regex
+  if [[ $branch =~ $pattern ]]; then
+    extracted_part="${BASH_REMATCH[2]}"
+  else
+    extracted_part="no-task"
   fi
-  
-  eval "git commit -a -m '${commitMessage}'"
+
+  if [ "$commitMessage" = "" ]; then
+    commitMessage=$(aicommits)
+  fi
+
+  # combine branchname and aicommits
+  eval "git commit -a -m '${extracted_part} ${commitMessage}'"
 }
 
 ```
