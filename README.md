@@ -5,6 +5,7 @@ Uses `git diff --staged` to generate better commit messages.
  - `composer global require valantic/aicommits`
  - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).)
  - Bash Example: adjust or create your `.bashrc-personal`
+
 ```shell
 export OPENAI_KEY=sk-...
 
@@ -22,10 +23,13 @@ function commit() {
 
 ```
 
+# assumtions gitlab repo configuration
+ - JIRA connected
+ - configured git hook following a naming convention i.e. `task/jiraticket-xxxx_branch_description` (`#((feature|bugfix|task|hotfix|improvement|release)/jiraticket-[0-9]{1,})|master|staging|no-task/(.+)?$#i`) 
 
 # usage
  - php aicommits.php
 
 
 # ToDo
-## perfect code, with no bugs ;-)
+## perfect code, no todos, no bugs ;-)
