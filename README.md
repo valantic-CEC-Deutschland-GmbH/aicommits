@@ -11,11 +11,12 @@ export OPENAI_KEY=sk-...
 #  Commit everything
 function commit() {
   commitMessage="$*"
-
+  git add .
+    
   if [ "$commitMessage" = "" ]; then
      commitMessage = (php aicommits)
   fi
-    
+  
   echo "git commit -a -m '${commitMessage}'"
 }
 
