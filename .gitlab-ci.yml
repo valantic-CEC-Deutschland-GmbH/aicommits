@@ -1,6 +1,7 @@
 image: registry.gitlab.nxs360.com/docker/php:8.1-cli
 
 stages:
+  - release
   - deploy
 
 
