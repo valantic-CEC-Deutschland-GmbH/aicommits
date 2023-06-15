@@ -18,12 +18,5 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
-    },
-    "scripts": {
-        "cs-fix": "",
-        "cs-check": "",
-        "md-check": "",
-        "stan": "",
-        "test": ""
     }
 }

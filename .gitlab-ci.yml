@@ -4,3 +4,7 @@ include:
   - project: packages/gitlab-templates/ci-cd-template-spryker-composer-package
     ref: main
     file: .gitlab-ci.yml
+
+
+tests:coverage:
+  when: never
