@@ -18,18 +18,19 @@ if [ -d "$HOME/.config/composer/vendor/bin" ] ;
 fi
 
 # set OPENAI_KEY environment variable
-export OPENAI_KEY=sk-...
+export OPENAI_KEY=sk-....
 
 # Commit everything helper function
 function commit() {
   commitMessage="$*"
+
   git add .
     
   if [ "$commitMessage" = "" ]; then
-     commitMessage = $(php aicommits)
+     commitMessage=$(php aicommits)
   fi
   
-  echo "git commit -a -m '${commitMessage}'"
+  eval "git commit -a -m '${commitMessage}'"
 }
 
 ```
