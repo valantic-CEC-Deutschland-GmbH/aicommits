@@ -53,17 +53,6 @@ function generateCommitMessageFromDiff($diff): string {
     return str_replace(['"', "\n"], '', $message);
 }
 
-function addBranchToCommitMessage(string $commitMsg): string {
-    $branchName = runCommand('git rev-parse --abbrev-ref HEAD');
-
-    if (in_array($branchName, ['staging', 'main', 'master']) || str_starts_with($branchName, 'no-task')) {
-        $branchName = 'no-task';
-    } elseif (str_contains($branchName, '/')) {
-        $branchName = explode('/', $branchName)[1];
-    }
-    return $branchName . ' ' . $commitMsg;
-}
-
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
     if (!checkIfCommitsAreStaged()) {
         echo 'No staged commits';
@@ -71,7 +60,6 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
     }
     $diff = runCommand('git diff --staged');
     $commitMessage = generateCommitMessageFromDiff($diff);
-    $commitMessage = addBranchToCommitMessage($commitMessage);
 
-    echo json_encode($commitMessage);
+    echo $commitMessage;
 }
