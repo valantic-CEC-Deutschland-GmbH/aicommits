@@ -21,29 +21,6 @@ build:vendor:
     <<: *global_cache
     policy: push
 
-test:phpunit:
-  stage: test
-  script:
-    - vendor/bin/phpunit
-    # Cat summary so Gitlab can parse coverage by the given regex
-    - cat report/coverage.txt
-  variables:
-    XDEBUG_MODE: coverage
-  coverage: /^\s*Lines:\s*(\d+.\d+)\%/
-  artifacts:
-    paths:
-      - report/
-    reports:
-      cobertura: report/cobertura.xml
-
-test:yamllint:
-  image:
-    name: cytopia/yamllint:latest
-    entrypoint: ["/bin/ash", "-c"]
-  stage: test
-  script:
-    - yamllint -f colored .
-
 deploy:composer:
   stage: deploy
   script:

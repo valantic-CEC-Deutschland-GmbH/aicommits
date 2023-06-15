@@ -3,9 +3,11 @@ Uses `git diff --staged` to generate better commit messages.
 
 # 
  - `composer global require valantic/aicommits`
- - publish your openai key as a environment variable `OPENAI_KEY=sk-....` (You can retrieve it from [OpenAI API Keys page](https://platform.openai.com/account/api-keys).)
- - add i.e. a helper function to your `~/.bashrc`
+ - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).)
+ - Bash Example: adjust or create your `.bashrc-personal`
 ```shell
+export OPENAI_KEY=sk-...
+
 #  Commit everything
 function commit() {
   commitMessage="$*"
@@ -16,11 +18,12 @@ function commit() {
     
   echo "git commit -a -m '${commitMessage}'"
 }
+
 ```
 
 
 # usage
- - OPENAI_KEY=sk-.... php aicommits.php
+ - php aicommits.php
 
 
 # ToDo

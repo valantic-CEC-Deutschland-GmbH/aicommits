@@ -3,7 +3,9 @@
     "description": "Uses `git diff --staged` to generate better commit messages.",
     "type": "library",
     "license": "MIT",
-    "bin": ["aicommits.php"],
+    "bin": [
+      "aicommits"
+    ],
     "authors": [
         {
             "name": "Patrick Schönfeld",
