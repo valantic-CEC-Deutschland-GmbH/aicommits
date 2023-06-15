@@ -1,6 +1,9 @@
 # aicommit
 Uses `git diff --staged` to generate better commit messages.
 
+# demo (changes in two different repositories)
+![Peek 2023-06-15 19-29.gif](Peek%202023-06-15%2019-29.gif)
+
 # Setup
  - decide if you like to install it globally, or only for your project:
  - Global example:
