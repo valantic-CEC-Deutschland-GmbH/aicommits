@@ -11,7 +11,7 @@ Uses `git diff --staged` to generate better commit messages.
    - install aicommits (pass your personal access token) `COMPOSER_AUTH='{"gitlab-oauth": {"gitlab.nxs360.com": "YOUR_GITLAB_TOKEN"}}' composer global require valantic/aicommits` ([Gitlab Token](https://gitlab.nxs360.com/-/profile/personal_access_tokens))
  - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).)
  - Create your own AI Git Commit command
-   - Example for `bash`: adjust or create your `.bashrc-personal`
+   - Example for `bash`: adjust or create your `.bashrc/.bashrc-personal`
 
 ```shell
 
