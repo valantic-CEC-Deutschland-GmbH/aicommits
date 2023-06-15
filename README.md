@@ -1,7 +1,7 @@
 # aicommit
 Uses `git diff --staged` to generate better commit messages.
 
-# Install instructions 
+#
  - decide if you like to install it globally, or only for your project:
  - Global example:
    - add private registry `composer config repositories.gitlab.nxs360.com/460 '{"type": "composer", "url": "https://gitlab.nxs360.com/api/v4/group/460/-/packages/composer/packages.json"}'`
