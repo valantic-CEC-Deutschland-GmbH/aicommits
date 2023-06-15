@@ -1,0 +1,66 @@
+---
+image: registry.gitlab.nxs360.com/docker/php:8.0-cli
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache: &global_cache
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - vendor/
+    - composer.lock
+  policy: pull
+
+build:vendor:
+  stage: build
+  script:
+    - composer install
+  cache:
+    <<: *global_cache
+    policy: push
+
+test:phpunit:
+  stage: test
+  script:
+    - vendor/bin/phpunit
+    # Cat summary so Gitlab can parse coverage by the given regex
+    - cat report/coverage.txt
+  variables:
+    XDEBUG_MODE: coverage
+  coverage: /^\s*Lines:\s*(\d+.\d+)\%/
+  artifacts:
+    paths:
+      - report/
+    reports:
+      cobertura: report/cobertura.xml
+
+test:yamllint:
+  image:
+    name: cytopia/yamllint:latest
+    entrypoint: ["/bin/ash", "-c"]
+  stage: test
+  script:
+    - yamllint -f colored .
+
+deploy:composer:
+  stage: deploy
+  script:
+    - version=$([[ -z "$CI_COMMIT_TAG" ]] && echo "branch=$CI_COMMIT_REF_NAME" || echo "tag=$CI_COMMIT_TAG")
+    - response=$(curl -s -w "\n%{http_code}" $insecure --data $version $URL)
+    - code=$(echo "$response" | tail -n 1)
+    - body=$(echo "$response" | head -n 1)
+    # Output state information
+    - |
+      if [ $code -eq 201 ]; then
+        echo "Package created - Code $code - $body";
+      else
+        echo "Could not create package - Code $code - $body";
+        exit 1
+      fi
+  variables:
+    URL: "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages/composer?job_token=$CI_JOB_TOKEN"
+  only:
+    - tags
+    - branches

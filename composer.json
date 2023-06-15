@@ -1,0 +1,20 @@
+{
+    "name": "valantic/aicommits",
+    "description": "Uses `git diff --staged` to generate better commit messages.",
+    "type": "library",
+    "license": "MIT",
+    "bin": ["aicommits.php"],
+    "authors": [
+        {
+            "name": "Patrick Schönfeld",
+            "email": "patrick.schoenfeld@cec.valantic.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
