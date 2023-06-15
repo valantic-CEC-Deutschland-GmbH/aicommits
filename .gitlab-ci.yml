@@ -7,5 +7,6 @@ include:
 
 
 tests:coverage:
-  stage: validation
-  when: never
+  rules:
+    - when: never
+
