@@ -94,7 +94,7 @@ function getDiffCommand(): string
 
 function sliceDiff(string $diff): string
 {
-    return substr($diff, 0, 1000);
+    return substr($diff, 0, 5000);
 }
 
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
