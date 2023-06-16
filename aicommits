@@ -1,15 +1,18 @@
 #!/usr/bin/php
 <?php
 
-function runCommand($command): string {
+function runCommand($command): string
+{
     exec($command, $output, $returnCode);
     if ($returnCode !== 0) {
         throw new Exception("Command $command failed with exit code $returnCode");
     }
+
     return implode("\n", $output);
 }
 
-function checkIfCommitsAreStaged(): bool {
+function checkIfCommitsAreStaged(): bool
+{
     try {
         $result = runCommand('git diff --staged');
         if ($result === '') {
@@ -18,10 +21,12 @@ function checkIfCommitsAreStaged(): bool {
     } catch (Exception $e) {
         return false;
     }
+
     return true;
 }
 
-function generateCommitMessageFromDiff($diff): string {
+function generateCommitMessageFromDiff($diff): string
+{
     $prompt = "Given the following git patch file:\n$diff\n###\nGenerate a one-sentence long git commit message.\nReturn only the commit message without comments or other text.";
 
     $openAiKey = getenv('OPENAI_KEY');
@@ -31,12 +36,12 @@ function generateCommitMessageFromDiff($diff): string {
         'prompt' => $prompt,
         'temperature' => 0,
         'model' => 'text-davinci-003',
-        'max_tokens' => 128
+        'max_tokens' => 128,
     ];
 
     $headers = [
         'Content-Type: application/json',
-        'Authorization: Bearer ' . $openAiKey
+        'Authorization: Bearer ' . $openAiKey,
     ];
 
     $ch = curl_init($endpoint);
@@ -50,7 +55,31 @@ function generateCommitMessageFromDiff($diff): string {
 
     $responseData = json_decode($response, true);
     $message = $responseData['choices'][0]['text'];
+
     return str_replace(['"', "\n"], '', $message);
+}
+
+function getDiffCommand(): string
+{
+    $excludeList = [
+        'package-lock.json',
+        '*.lock',
+    ];
+
+    $excluded = implode(
+        ' ',
+        array_map(fn ($entry): string => sprintf(
+            "'%s%s'",
+            ':!',
+            $entry
+        ), $excludeList)
+    );
+
+    return 'git diff'
+        . ' --staged'
+        . ' --minimal'
+        . ' --ignore-all-space'
+        . ' -- . ' . $excluded;
 }
 
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
@@ -58,7 +87,8 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
         echo 'No staged commits';
         exit(0);
     }
-    $diff = runCommand('git diff --staged');
+
+    $diff = runCommand(getDiffCommand());
     $commitMessage = generateCommitMessageFromDiff($diff);
 
     echo $commitMessage;
