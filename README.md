@@ -87,6 +87,14 @@ function commit() {
 
 # Struggeling? Check the full install video
  - [simplescreenrecorder-2023-06-16_11.28.52.mkv](simplescreenrecorder-2023-06-16_11.28.52.mkv)
-
+ - 404 group not found? Your access to private package registry is configured incorrectly. Try creating a global used `auth.json` (place i.e. in `/home/xxxx/.config/composer/auth.json`) 
+```json
+"http-basic":  {
+    "gitlab.nxs360.com":  {
+        "username":  "___token___",
+        "password":  "<TOKEN>"
+    }
+}
+```
 # ToDo
 ## perfect code, no todos, no bugs ;-)
