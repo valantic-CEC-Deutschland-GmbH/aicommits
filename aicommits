@@ -88,6 +88,7 @@ function getDiffCommand(): string
         . ' --staged'
         . ' --minimal'
         . ' --ignore-all-space'
+        . ' --unified=0'
         . ' -- . ' . $excluded;
 }
 
