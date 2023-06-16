@@ -27,15 +27,24 @@ function checkIfCommitsAreStaged(): bool
 
 function generateCommitMessageFromDiff($diff): string
 {
-    $prompt = "Given the following git patch file:\n$diff\n###\nGenerate a one-sentence long git commit message.\nReturn only the commit message without comments or other text.";
+    $prompt = 'Given the following git patch file, generate a one-sentence long git commit message. Return only the commit message without comments or other text.';
 
     $openAiKey = getenv('OPENAI_KEY');
-    $endpoint = 'https://api.openai.com/v1/completions';
+    $endpoint = 'https://api.openai.com/v1/chat/completions';
 
     $data = [
-        'prompt' => $prompt,
         'temperature' => 0,
-        'model' => 'text-davinci-003',
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+            [
+                'role' => 'system',
+                'content' => $prompt,
+            ],
+            [
+                'role' => 'user',
+                'content' => $diff,
+            ],
+        ],
         'max_tokens' => 128,
     ];
 
@@ -54,7 +63,7 @@ function generateCommitMessageFromDiff($diff): string
     curl_close($ch);
 
     $responseData = json_decode($response, true);
-    $message = $responseData['choices'][0]['text'];
+    $message = $responseData['choices'][0]['message']['content'];
 
     return str_replace(['"', "\n"], '', $message);
 }
@@ -68,7 +77,7 @@ function getDiffCommand(): string
 
     $excluded = implode(
         ' ',
-        array_map(fn ($entry): string => sprintf(
+        array_map(fn($entry): string => sprintf(
             "'%s%s'",
             ':!',
             $entry
