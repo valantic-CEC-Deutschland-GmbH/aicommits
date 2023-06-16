@@ -85,5 +85,8 @@ function commit() {
 # development usage
  - php aicommits
 
+# Struggeling? Check the full install video
+ - [simplescreenrecorder-2023-06-16_11.28.52.mkv](simplescreenrecorder-2023-06-16_11.28.52.mkv)
+
 # ToDo
 ## perfect code, no todos, no bugs ;-)
