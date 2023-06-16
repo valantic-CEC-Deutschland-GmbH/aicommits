@@ -92,6 +92,11 @@ function getDiffCommand(): string
         . ' -- . ' . $excluded;
 }
 
+function sliceDiff(string $diff): string
+{
+    return substr($diff, 0, 1000);
+}
+
 if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
     if (!checkIfCommitsAreStaged()) {
         echo 'No staged commits';
@@ -99,6 +104,7 @@ if (basename(__FILE__) === basename($_SERVER['PHP_SELF'])) {
     }
 
     $diff = runCommand(getDiffCommand());
+    $diff = sliceDiff($diff);
     $commitMessage = generateCommitMessageFromDiff($diff);
 
     echo $commitMessage;
