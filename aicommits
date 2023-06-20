@@ -65,7 +65,7 @@ function generateCommitMessageFromDiff($diff): string
     $responseData = json_decode($response, true);
     $message = $responseData['choices'][0]['message']['content'];
 
-    return str_replace(['"', "\n"], '', $message);
+    return str_replace(['"', "\n"], "'", '', $message);
 }
 
 function getDiffCommand(): string
