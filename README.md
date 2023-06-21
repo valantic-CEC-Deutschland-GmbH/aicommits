@@ -20,8 +20,8 @@ Uses `git diff --staged` to generate better commit messages.
       ```
      - add private registry `composer global config repositories.gitlab.nxs360.com/460 '{"type": "composer", "url": "https://gitlab.nxs360.com/api/v4/group/460/-/packages/composer/packages.json"}'`
      - install aicommits (pass your personal access token) `composer global require valantic/aicommits` ([Gitlab Token](https://gitlab.nxs360.com/-/profile/personal_access_tokens))
- - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).)
- - Create your own AI Git Commit command
+ - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).
+ - Add `OPENAI_KEY` to your environment and create your own AI Git Commit command
    - Example for `bash`: adjust or create your `.bashrc/.zshrc/.bashrc-personal`
 
 ```shell
