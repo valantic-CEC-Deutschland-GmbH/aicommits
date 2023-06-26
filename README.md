@@ -71,6 +71,7 @@ function commit() {
   branch=$(git rev-parse --abbrev-ref HEAD)
 
   # Define the regular expression pattern for your branch naming convension
+  # Example Branchname: feature/spry-1234_add_fancy_feature
   pattern="^(feature|bugfix|task|hotfix|improvement|release)/([[:alnum:]-]+)"
 
   # Extract the specific part using regex
