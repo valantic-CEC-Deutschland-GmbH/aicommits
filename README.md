@@ -90,6 +90,8 @@ function commit() {
 }
 ```
 
+.zshrc example: https://gitlab.nxs360.com/packages/php/aicommit/-/blob/main/.zshrc-example
+
 # assumtions for gitlab repo configuration
  - JIRA connected
  - configured git hook following a naming convention i.e. `task/jiraticket-xxxx_branch_description` (`#((feature|bugfix|task|hotfix|improvement|release)/jiraticket-[0-9]{1,})|master|staging|no-task/(.+)?$#i`) 
