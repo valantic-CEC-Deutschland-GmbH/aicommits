@@ -25,7 +25,7 @@ Uses `git diff --staged` to generate better commit messages.
    - Example for `bash`: adjust or create your `.bashrc/.zshrc/.bashrc-personal`
 
 ```shell
-# Basic example
+# Basic example (~/.bashrc or ~/.bash-personal)
 
 # set global composer directory into path
 if [ -d "$HOME/.config/composer/vendor/bin" ] ;
@@ -51,7 +51,7 @@ function commit() {
 ```
 
 ```shell
-# Extended example following naming conventions
+# Extended example following naming conventions  (~/.bashrc or ~/.bash-personal)
 
 # set global composer directory into path
 if [ -d "$HOME/.config/composer/vendor/bin" ] ;
