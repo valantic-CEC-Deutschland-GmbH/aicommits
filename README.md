@@ -6,8 +6,7 @@ Uses `git diff --staged` to generate better commit messages.
 
 # Setup
  - `composer global require valantic-cec/aicommits`
- - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).
- - Add `OPENAI_KEY` to your environment and create your own AI Git Commit command
+ - Add `OPENAI_KEY` to your environment and create your own AI Git Commit command ([OpenAI API Key](https://platform.openai.com/account/api-keys))
    - Example for `bash`: adjust or create your `.bashrc/.zshrc/.bashrc-personal`
 
 ```shell
