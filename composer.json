@@ -1,5 +1,5 @@
 {
-    "name": "valantic/aicommits",
+    "name": "valantic-cec/aicommits",
     "description": "Uses `git diff --staged` to generate better commit messages.",
     "type": "library",
     "license": "MIT",

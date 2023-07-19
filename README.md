@@ -5,21 +5,7 @@ Uses `git diff --staged` to generate better commit messages.
 ![Peek 2023-06-15 19-29.gif](Peek%202023-06-15%2019-29.gif)
 
 # Setup
- - decide if you like to install it globally, or only for your project:
-   - Global example:
-     - create `~/.config/composer/auth.json` (Only replace <TOKEN> and not ___token___)
-     ```json
-     {
-        "http-basic":  {
-           "gitlab.nxs360.com":  {
-              "username":  "___token___",
-              "password":  "<TOKEN>"
-           }
-        }
-     }
-      ```
-     - add private registry `composer global config repositories.gitlab.nxs360.com/460 '{"type": "composer", "url": "https://gitlab.nxs360.com/api/v4/group/460/-/packages/composer/packages.json"}'`
-     - install aicommits (pass your personal access token) `composer global require valantic/aicommits` ([Gitlab Token](https://gitlab.nxs360.com/-/profile/personal_access_tokens))
+ - `composer global require valantic-cec/aicommits`
  - Retrieve your [OpenAI API Key](https://platform.openai.com/account/api-keys).
  - Add `OPENAI_KEY` to your environment and create your own AI Git Commit command
    - Example for `bash`: adjust or create your `.bashrc/.zshrc/.bashrc-personal`
@@ -90,7 +76,7 @@ function commit() {
 }
 ```
 
-.zshrc example: https://gitlab.nxs360.com/packages/php/aicommit/-/blob/main/.zshrc-example
+.zshrc example: https://github.com/valantic-CEC-Deutschland-GmbH/aicommits/blob/main/.zshrc-example
 
 # assumtions for gitlab repo configuration
  - JIRA connected
@@ -99,18 +85,5 @@ function commit() {
 # development usage
  - php aicommits
 
-# Struggeling? Check the full install video
- - [simplescreenrecorder-2023-06-16_11.28.52.mkv](simplescreenrecorder-2023-06-16_11.28.52.mkv)
- - 404 group not found? Your access to private package registry is configured incorrectly. Try creating a global used `auth.json` (place i.e. in `/home/xxxx/.config/composer/auth.json`) 
-```json
-{
-   "http-basic":  {
-      "gitlab.nxs360.com":  {
-         "username":  "___token___",
-         "password":  "<TOKEN>"
-      }
-   }
-}
-```
 # ToDo
 ## perfect code, no todos, no bugs ;-)
